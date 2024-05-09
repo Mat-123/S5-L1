@@ -20,11 +20,10 @@ $fileHandle = fopen($importFile, 'r');
 
 fgetcsv($fileHandle);
 
-$sql = "INSERT INTO wp_users (ID, user_login, user_pass, user_nicename, user_email, user_url, user_registered, user_activation_key, user_status, display_name) VALUES (:valore1, :valore2, :valore3, :valore4, :valore5, :valore6, :valore7, :valore8, :valore9, :valore10)";
+$sql = "INSERT INTO wp_users ( user_login, user_pass, user_nicename, user_email, user_url, user_registered, user_activation_key, user_status, display_name) VALUES ( :valore2, :valore3, :valore4, :valore5, :valore6, :valore7, :valore8, :valore9, :valore10)";
 $stmt = $pdo->prepare($sql);
 
 while (($row = fgetcsv($fileHandle, 0, ',')) !== false) {
-    $valore1 = $row[0];
     $valore2 = $row[1];
     $valore3 = $row[2];
     $valore4 = $row[3];
@@ -35,7 +34,6 @@ while (($row = fgetcsv($fileHandle, 0, ',')) !== false) {
     $valore9 = $row[8];
     $valore10 = $row[9];
     $stmt->execute([
-        'valore1' => $valore1,
         'valore2' => $valore2,
         'valore3' => $valore3,
         'valore4' => $valore4,
